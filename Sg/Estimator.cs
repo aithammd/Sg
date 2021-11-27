@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sg
 {
-    abstract class Estimator
+    public abstract class Estimator
     {
         public double EndDate { get; set; }
         public List<double> Data { get; set; }

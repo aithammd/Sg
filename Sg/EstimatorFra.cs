@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sg
 {
-    class EstimatorFra:Estimator
+    public class EstimatorFra:Estimator
     {
         //public List<double> Data { get; set; }//contient des FRA rates
         public EstimatorFra(double End,List<double> data)
@@ -21,14 +21,13 @@ namespace Sg
         public override void EstimateZc()
         {
             Zc.Add(0,1);//on ajoute le P(0,1)
-            yield.Add(0,2.2375 / 100);
+            yield.Add(0,Data[0]*100);
             double T = 1;
-            //int N = 10;
             while (T <= EndDate)
             {
                 double ZC = Zc[T - 1] / (1 + Data[(int)T - 1]);//Price of a zero coupon of maturity T
                 Zc.Add(T, ZC);
-                yield.Add(T, -Math.Log(ZC) / T);//on a joute le taux zc correspondant
+                yield.Add(T, 100 * -Math.Log(ZC) / T);//on a joute le taux zc correspondant
                 T += 1;
             }
             return;
