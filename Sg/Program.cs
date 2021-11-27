@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sg
 {
@@ -10,23 +7,43 @@ namespace Sg
     {
         static void Main(string[] args)
         {
-            List<double> Fra = new List<double>(){2.2375/100, 2.4594 / 100, 2.6818 / 100, 2.7422 / 100, 2.6625 / 100 };
-            List<double> swap = new List<double>() { 0.662 / 100, 1.062 / 100, 1.170 / 100, 1.194 / 100, 1.191 / 100 };
-
-            Estimator est = new EstimatorFra(5,Fra);
-            Estimator estswap = new EstimatorFra(5, swap);
-
-            est.EstimateZc();
-            estswap.EstimateZc();
-            Dictionary<double, double> result = est.yield;
-            Dictionary<double, double> resultswap = estswap.yield;
-
-            foreach (KeyValuePair<double, double> entry in resultswap)
+            Dictionary<double, double> MarketDatasFRA = new Dictionary<double, double>()
             {
-                Console.WriteLine("taux for maturity = "+entry.Key + " rate : "+entry.Value*100 +"%");
-            }
-            Console.WriteLine("done");
+                { 1, 2.2375 / 100 },
+                { 2, 2.4594 / 100 },
+                { 3, 2.6818 / 100 },
+                { 4, 2.7422 / 100 },
+                { 5, 2.6625 / 100 }
+            };
+            Calculator calculatorFromFRAs = new CalculatorFromFRAs(MarketDatasFRA);
+            Dictionary<double, double> zeroCouponsFromFRAs = calculatorFromFRAs.CalculateZeroCoupons();
+            PrintZeroCoupons(zeroCouponsFromFRAs);
+
+            Dictionary<double, double> MarketDatasSwaps = new Dictionary<double, double>()
+            {
+                { 1, 0.662 / 100 },
+                { 2, 1.062 / 100 },
+                { 3, 1.170 / 100 },
+                { 4, 1.194 / 100 },
+                { 5, 1.191 / 100 }
+            };
+
+            Calculator calculatorFromSwaps = new CalculatorFromSwaps(MarketDatasSwaps);
+            Dictionary<double, double> zeroCouponsFromSwaps = calculatorFromSwaps.CalculateZeroCoupons();
+            PrintZeroCoupons(zeroCouponsFromSwaps);
+
             Console.ReadLine();
+        }
+
+        public static void PrintZeroCoupons(Dictionary<double, double> zeroCoupons)
+        {
+            Console.WriteLine("Printing zero-coupon values:");
+
+            foreach (KeyValuePair<double, double> entry in zeroCoupons)
+            {
+                Console.WriteLine("Zero-coupon for maturity = " + entry.Key + " is: " + entry.Value);
+            }
+            Console.WriteLine("Done!" + System.Environment.NewLine);
         }
     }
 }

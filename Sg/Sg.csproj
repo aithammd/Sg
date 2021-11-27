@@ -43,9 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EstimatorSwap.cs" />
-    <Compile Include="EstimatorFra.cs" />
-    <Compile Include="Estimator.cs" />
+    <Compile Include="Curve.cs" />
+    <Compile Include="CalculatorFromSwaps.cs" />
+    <Compile Include="CalculatorFromFRAs.cs" />
+    <Compile Include="Calculator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
