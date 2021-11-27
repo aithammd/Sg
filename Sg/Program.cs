@@ -23,7 +23,7 @@ namespace Sg
 
             foreach (KeyValuePair<double, double> entry in resultswap)
             {
-                Console.WriteLine("taux for maturity = "+entry.Key + " rate : "+entry.Value*100 +"%");
+                Console.WriteLine("taux for maturity = "+entry.Key + " rate : "+entry.Valsue*100 +"%");
             }
             Console.WriteLine("done");
             Console.ReadLine();
