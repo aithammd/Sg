@@ -2,7 +2,7 @@
 
 namespace Sg
 {
-    abstract class Calculator
+    public abstract class Calculator
     {
         public Dictionary<double, double> MarketDatas { get; set; }
 

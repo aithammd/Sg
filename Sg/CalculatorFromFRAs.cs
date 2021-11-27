@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Sg
 {
-    class CalculatorFromFRAs : Calculator
+    public class CalculatorFromFRAs : Calculator
     {
         public CalculatorFromFRAs(Dictionary<double, double> marketDatas)
         {
@@ -13,7 +13,8 @@ namespace Sg
         public override Dictionary<double, double> CalculateZeroCoupons()
         {
             Dictionary<double, double> result = new Dictionary<double, double> { { 0.0, 1.0 } };
-            
+            Dictionary<double, double> yield = new Dictionary<double, double> { { 0.0, 0.0 } };
+
             int N = MarketDatas.Count;
 
             double T = 1.0;
@@ -21,11 +22,12 @@ namespace Sg
             {
                 double zeroCoupon = result[T - 1.0] / (1 + MarketDatas[T]); // Price of a zero coupon of maturity T
                 result.Add(T, zeroCoupon);
+                yield.Add(T,-Math.Log(zeroCoupon)*100/T);
 
                 T += 1;
             }
 
-            return result;
+            return yield;
         }
     }
 }

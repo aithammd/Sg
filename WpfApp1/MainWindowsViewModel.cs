@@ -29,13 +29,28 @@ namespace WpfApp1
         }
         public MainWindowsViewModel()
         {
-            List<double> swap = new List<double>() { -0.521 / 100, -0.368 / 100, -0.256 / 100, -0.185 / 100, -0.130 / 100 };
-            List<double> Fra = new List<double>() { 2.2375 / 100, 2.4594 / 100, 2.6818 / 100, 2.7422 / 100, 2.6625 / 100 };
+            Dictionary<double, double> MarketDatasSwaps = new Dictionary<double, double>()
+            {
+                { 1, 0.662 / 100 },
+                { 2, 1.062 / 100 },
+                { 3, 1.170 / 100 },
+                { 4, 1.194 / 100 },
+                { 5, 1.191 / 100 }
+            };
+            //Calculator est = new CalculatorFromSwaps(MarketDatasSwaps);
+            Dictionary<double, double> MarketDatasFRA = new Dictionary<double, double>()
+            {
+                { 1, 2.2375 / 100 },
+                { 2, 2.4594 / 100 },
+                { 3, 2.6818 / 100 },
+                { 4, 2.7422 / 100 },
+                { 5, 2.6625 / 100 }
+            };
 
-            Estimator est = new EstimatorSwap(5, swap);
+            Calculator est = new CalculatorFromFRAs(MarketDatasFRA);
 
-            est.EstimateZc();
-            Dictionary<double, double> result = est.yield;
+
+            Dictionary<double, double> result = est.CalculateZeroCoupons();
             string[] keys = Array.ConvertAll(result.Keys.ToArray(), item => item.ToString());
             double[] values = result.Values.ToArray();
 
