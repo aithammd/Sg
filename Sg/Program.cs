@@ -7,7 +7,7 @@ namespace Sg
     {
         static void Main(string[] args)
         {
-            Dictionary<double, double> MarketDatasFRA = new Dictionary<double, double>()
+            SortedDictionary<double, double> MarketDatasFRA = new SortedDictionary<double, double>()
             {
                 { 1, 2.2375 / 100 },
                 { 2, 2.4594 / 100 },
@@ -19,7 +19,10 @@ namespace Sg
             SortedDictionary<double, double> zeroCouponsFromFRAs = calculatorFromFRAs.CalculateZeroCoupons();
             PrintZeroCoupons(zeroCouponsFromFRAs);
 
-            Dictionary<double, double> MarketDatasSwaps = new Dictionary<double, double>()
+            var zeroCouponCurveFromFRAs = new DiscountCurveUsingLinearInterpolationOnYield(zeroCouponsFromFRAs);
+            PrintSampledCurve(zeroCouponCurveFromFRAs);
+
+            SortedDictionary<double, double> MarketDatasSwaps = new SortedDictionary<double, double>()
             {
                 { 1, 0.662 / 100 },
                 { 2, 1.062 / 100 },
@@ -31,8 +34,6 @@ namespace Sg
             Calculator calculatorFromSwaps = new CalculatorFromSwaps(MarketDatasSwaps);
             SortedDictionary<double, double> zeroCouponsFromSwaps = calculatorFromSwaps.CalculateZeroCoupons();
             PrintZeroCoupons(zeroCouponsFromSwaps);
-
-            Console.ReadLine();
         }
 
         public static void PrintZeroCoupons(SortedDictionary<double, double> zeroCoupons)
@@ -43,7 +44,21 @@ namespace Sg
             {
                 Console.WriteLine("Zero-coupon for maturity = " + entry.Key + " is: " + entry.Value);
             }
-            Console.WriteLine("done");
+            Console.WriteLine("Done.");
+            Console.ReadLine();
+        }
+
+        public static void PrintSampledCurve(ICurve curve)
+        {
+            Console.WriteLine("Sampling zero-coupon values:");
+
+            SortedDictionary<double, double> sampledValues = curve.Sample(3);
+
+            foreach (KeyValuePair<double, double> entry in sampledValues)
+            {
+                Console.WriteLine("Zero-coupon for date = " + entry.Key + " is: " + entry.Value);
+            }
+            Console.WriteLine("Done.");
             Console.ReadLine();
         }
     }
