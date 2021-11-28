@@ -29,7 +29,7 @@ namespace WpfApp1
         }
         public MainWindowsViewModel()
         {
-            Dictionary<double, double> MarketDatasSwaps = new Dictionary<double, double>()
+            SortedDictionary<double, double> MarketDatasSwaps = new SortedDictionary<double, double>()
             {
                 { 1, 0.662 / 100 },
                 { 2, 1.062 / 100 },
@@ -38,7 +38,8 @@ namespace WpfApp1
                 { 5, 1.191 / 100 }
             };
             Calculator est2 = new CalculatorFromSwaps(MarketDatasSwaps);
-            Dictionary<double, double> MarketDatasFRA = new Dictionary<double, double>()
+
+            SortedDictionary<double, double> MarketDatasFRA = new SortedDictionary<double, double>()
             {
                 { 1, 2.2375 / 100 },
                 { 2, 2.4594 / 100 },
@@ -46,13 +47,9 @@ namespace WpfApp1
                 { 4, 2.7422 / 100 },
                 { 5, 2.6625 / 100 }
             };
-
             Calculator est = new CalculatorFromFRAs(MarketDatasFRA);
 
-
             SortedDictionary<double, double> result = est.CalculateZeroCoupons();
-            double a = Curve.ValueAtDate(result, 1.5);
-            double b = Curve.ValueAtDate(result, 2.5);
 
             string[] keys = Array.ConvertAll(result.Keys.ToArray(), item => item.ToString());
             double[] values = result.Values.ToArray();

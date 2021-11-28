@@ -16,11 +16,17 @@ namespace Sg
                 { 5, 2.6625 / 100 }
             };
             Calculator calculatorFromFRAs = new CalculatorFromFRAs(MarketDatasFRA);
+
+            double lastDate = 3.0;
+
             SortedDictionary<double, double> zeroCouponsFromFRAs = calculatorFromFRAs.CalculateZeroCoupons();
             PrintZeroCoupons(zeroCouponsFromFRAs);
 
-            var zeroCouponCurveFromFRAs = new DiscountCurveUsingLinearInterpolationOnYield(zeroCouponsFromFRAs);
-            PrintSampledCurve(zeroCouponCurveFromFRAs);
+            YieldCurveUsingLinearInterpolation yieldCurveUsingLinearInterpolation = new YieldCurveUsingLinearInterpolation(zeroCouponsFromFRAs);
+            yieldCurveUsingLinearInterpolation.PrintSampledCurve(lastDate, "yieldCurveFromFRAs");
+
+            DiscountCurveFromYieldCurve discountCurveFromFRAs = new DiscountCurveFromYieldCurve(yieldCurveUsingLinearInterpolation);
+            discountCurveFromFRAs.PrintSampledCurve(lastDate, "discountCurveFromFRAs");
 
             SortedDictionary<double, double> MarketDatasSwaps = new SortedDictionary<double, double>()
             {
@@ -43,20 +49,6 @@ namespace Sg
             foreach (KeyValuePair<double, double> entry in zeroCoupons)
             {
                 Console.WriteLine("Zero-coupon for maturity = " + entry.Key + " is: " + entry.Value);
-            }
-            Console.WriteLine("Done.");
-            Console.ReadLine();
-        }
-
-        public static void PrintSampledCurve(ICurve curve)
-        {
-            Console.WriteLine("Sampling zero-coupon values:");
-
-            SortedDictionary<double, double> sampledValues = curve.Sample(3);
-
-            foreach (KeyValuePair<double, double> entry in sampledValues)
-            {
-                Console.WriteLine("Zero-coupon for date = " + entry.Key + " is: " + entry.Value);
             }
             Console.WriteLine("Done.");
             Console.ReadLine();
