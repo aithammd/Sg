@@ -43,13 +43,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Curve.cs" />
+    <Compile Include="ICurve.cs" />
     <Compile Include="CalculatorFromSwaps.cs" />
     <Compile Include="CalculatorFromFRAs.cs" />
     <Compile Include="Calculator.cs" />
+    <Compile Include="CurveUtilities.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DiscountCurveUsingLinearInterpolationOnYield.cs" />
+    <Compile Include="YieldCurveUsingLinearInterpolation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
