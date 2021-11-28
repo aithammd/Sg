@@ -5,7 +5,7 @@ namespace Sg
 {
     public class CalculatorFromFRAs : Calculator
     {
-        public CalculatorFromFRAs(Dictionary<double, double> marketDatas)
+        public CalculatorFromFRAs(SortedDictionary<double, double> marketDatas)
         {
             MarketDatas = marketDatas;
         }
