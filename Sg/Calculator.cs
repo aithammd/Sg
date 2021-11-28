@@ -6,6 +6,6 @@ namespace Sg
     {
         public Dictionary<double, double> MarketDatas { get; set; }
 
-        public abstract Dictionary<double, double> CalculateZeroCoupons();
+        public abstract SortedDictionary<double, double> CalculateZeroCoupons();
     }
 }

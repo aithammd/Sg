@@ -16,7 +16,7 @@ namespace Sg
                 { 5, 2.6625 / 100 }
             };
             Calculator calculatorFromFRAs = new CalculatorFromFRAs(MarketDatasFRA);
-            Dictionary<double, double> zeroCouponsFromFRAs = calculatorFromFRAs.CalculateZeroCoupons();
+            SortedDictionary<double, double> zeroCouponsFromFRAs = calculatorFromFRAs.CalculateZeroCoupons();
             PrintZeroCoupons(zeroCouponsFromFRAs);
 
             Dictionary<double, double> MarketDatasSwaps = new Dictionary<double, double>()
@@ -29,13 +29,13 @@ namespace Sg
             };
 
             Calculator calculatorFromSwaps = new CalculatorFromSwaps(MarketDatasSwaps);
-            Dictionary<double, double> zeroCouponsFromSwaps = calculatorFromSwaps.CalculateZeroCoupons();
+            SortedDictionary<double, double> zeroCouponsFromSwaps = calculatorFromSwaps.CalculateZeroCoupons();
             PrintZeroCoupons(zeroCouponsFromSwaps);
 
             Console.ReadLine();
         }
 
-        public static void PrintZeroCoupons(Dictionary<double, double> zeroCoupons)
+        public static void PrintZeroCoupons(SortedDictionary<double, double> zeroCoupons)
         {
             Console.WriteLine("Printing zero-coupon values:");
 

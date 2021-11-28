@@ -10,10 +10,10 @@ namespace Sg
             MarketDatas = marketDatas;
         }
 
-        public override Dictionary<double, double> CalculateZeroCoupons()
+        public override SortedDictionary<double, double> CalculateZeroCoupons()
         {
-            Dictionary<double, double> result = new Dictionary<double, double> { { 0.0, 1.0 } };
-            Dictionary<double, double> yield = new Dictionary<double, double> { { 0.0, 0.0 } };
+            SortedDictionary<double, double> result = new SortedDictionary<double, double> { { 0.0, 1.0 } };
+            SortedDictionary<double, double> yield = new SortedDictionary<double, double> { { 0.0, 0.0 } };
 
             int N = MarketDatas.Count;
 

@@ -37,7 +37,7 @@ namespace WpfApp1
                 { 4, 1.194 / 100 },
                 { 5, 1.191 / 100 }
             };
-            //Calculator est = new CalculatorFromSwaps(MarketDatasSwaps);
+            Calculator est2 = new CalculatorFromSwaps(MarketDatasSwaps);
             Dictionary<double, double> MarketDatasFRA = new Dictionary<double, double>()
             {
                 { 1, 2.2375 / 100 },
@@ -50,7 +50,10 @@ namespace WpfApp1
             Calculator est = new CalculatorFromFRAs(MarketDatasFRA);
 
 
-            Dictionary<double, double> result = est.CalculateZeroCoupons();
+            SortedDictionary<double, double> result = est.CalculateZeroCoupons();
+            double a = Curve.ValueAtDate(result, 1.5);
+            double b = Curve.ValueAtDate(result, 2.5);
+
             string[] keys = Array.ConvertAll(result.Keys.ToArray(), item => item.ToString());
             double[] values = result.Values.ToArray();
 
